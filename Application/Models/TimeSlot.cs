@@ -1,13 +1,7 @@
 namespace Application.Models;
 
-public class TimeSlot
+public record TimeSlot(TimeOnly start, TimeOnly end)
 {
-    public TimeOnly Start { get; }
-    public TimeOnly End { get; }
-    
-    public TimeSlot(TimeOnly start, TimeOnly end)
-    {
-        Start = start;
-        End = end;
-    }
+    public TimeOnly Start { get; } = start;
+    public TimeOnly End { get; } = end;
 }

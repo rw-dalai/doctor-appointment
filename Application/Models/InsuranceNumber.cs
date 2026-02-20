@@ -3,9 +3,8 @@ namespace Application.Models;
 // RichType
 // 1) Making illegal states unrepresentable
 // 2) Immutable
-// 3) Equality: structural equality ?
-// 4) ToString ?
-public class InsuranceNumber
+// 3) Equality: structurial equality
+public record InsuranceNumber
 {
     public string Value { get; }
     
