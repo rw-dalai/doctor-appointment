@@ -4,5 +4,16 @@ public class CancelledAppointmentState : AppointmentState
 {
     // --- EF Ctor ---
     
-    public CancelledAppointmentState(): base() { }
+    protected CancelledAppointmentState()
+    { }
+    
+    
+    // --- Business Ctor ---
+    
+    public CancelledAppointmentState(
+        Appointment appointment,
+        DateTime created
+    ) : base(appointment, created)
+    {
+    }
 }
