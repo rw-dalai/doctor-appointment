@@ -1,6 +1,6 @@
 namespace Application.Models;
 
-public class AppointmentException
+public class AppointmentException(string message) : Exception(message)
 {
-    
+    // ...
 }
