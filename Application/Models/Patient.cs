@@ -1,6 +1,24 @@
 namespace Application.Models;
 
+// Entity
 public class Patient
 {
+    public int Id { get; set; }
+    
+    public string Firstname { get; set; }
+    
+    public string Lastname { get; set; }
+    
+    public InsuranceNumber InsuranceNumber { get; set; }
+    
+    public PhoneNumber Mobile { get; set; }
+    
+    
+    // EF Ctor
+    protected Patient() { }
+    
+    // Business Ctor
+    // TODO
+        
     
 }
