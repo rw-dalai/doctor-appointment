@@ -9,8 +9,13 @@ public class Appointment
     
     public DateTime Created { get; set; }
     
+    // Navigation property
     public Patient Patient { get; set; }
     
+    // Shadow FK
+    // public int PatientId { get; set; }
+    
+    // Navigation property
     public AppointmentState? CurrentState { get; set; }
     
     
