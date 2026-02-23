@@ -43,6 +43,43 @@ namespace Application.Infrastructure;
  */
 public class AppointmentContext(DbContextOptions options ) : DbContext(options)
 {
+    /**
+ * CREATE TABLE "Doctors" (
+      "Id" INTEGER NOT NULL CONSTRAINT "PK_Doctors" PRIMARY KEY AUTOINCREMENT,
+      "Firstname" TEXT NOT NULL,
+      "Lastname" TEXT NOT NULL,
+      "Email" TEXT NOT NULL
+      );
+      
+    CREATE TABLE "Patients" (
+          "Id" INTEGER NOT NULL CONSTRAINT "PK_Patients" PRIMARY KEY AUTOINCREMENT,
+          "Firstname" TEXT NOT NULL,
+          "Lastname" TEXT NOT NULL,
+          "InsuranceNumber" VARCHAR2 NOT NULL,
+          "Mobile" TEXT NULL
+      );
+      
+      CREATE TABLE "Appointment" (
+            "Id" INTEGER NOT NULL CONSTRAINT "PK_Appointment" PRIMARY KEY AUTOINCREMENT,
+            "Date" TEXT NOT NULL,
+            "Created" TEXT NOT NULL,
+            "PatientId" INTEGER NOT NULL,
+            CONSTRAINT "FK_Appointment_Patient_PatientId" FOREIGN KEY ("PatientId") REFERENCES "Patient" ("Id") ON DELETE CASCADE
+        );
+        
+        CREATE TABLE "AppointmentState" (
+            "Id" INTEGER NOT NULL CONSTRAINT "PK_AppointmentState" PRIMARY KEY AUTOINCREMENT,
+            "AppointmentId" INTEGER NOT NULL,
+            "Created" TEXT NOT NULL,
+            "Type" TEXT NOT NULL,
+            "DoctorId" INTEGER NULL,
+            "PlannedSlot_start" TEXT NULL,
+            "PlannedSlot_end" TEXT NULL,
+            "Infotext" TEXT NULL,
+            CONSTRAINT "FK_AppointmentState_Appointment_AppointmentId" FOREIGN KEY ("AppointmentId") REFERENCES "Appointment" ("Id") ON DELETE CASCADE,
+            CONSTRAINT "FK_AppointmentState_Doctors_DoctorId" FOREIGN KEY ("DoctorId") REFERENCES "Doctors" ("Id") ON DELETE CASCADE
+);
+ */
     // --- DB Tables --
 
     public DbSet<Doctor> Doctors => Set<Doctor>();
@@ -57,7 +94,7 @@ public class AppointmentContext(DbContextOptions options ) : DbContext(options)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // 1. Tablennamen
-        modelBuilder.Entity<Doctor>().ToTable("Doctors");
+        modelBuilder.Entity<Doctor>().ToTable("Doctor");
         modelBuilder.Entity<Patient>().ToTable("Patient");
         modelBuilder.Entity<Appointment>().ToTable("Appointment");
         modelBuilder.Entity<AppointmentState>().ToTable("AppointmentState");
@@ -76,7 +113,7 @@ public class AppointmentContext(DbContextOptions options ) : DbContext(options)
         modelBuilder.Entity<Patient>()
             .Property<InsuranceNumber>(p => p.InsuranceNumber)
             .HasConversion(
-                number => number.Value, // C# -> DB
+                number => number.Value,             // C# -> DB
                 value => new InsuranceNumber(value) // DB -> C#
             );
         

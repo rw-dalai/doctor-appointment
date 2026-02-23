@@ -1,5 +1,7 @@
 namespace Application.Models;
 
+// anmic domain model (no behavior, just data)
+// rich domain model (with behavior) 
 public class Doctor
 {
     // PK
